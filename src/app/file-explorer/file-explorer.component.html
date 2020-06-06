@@ -1,0 +1,25 @@
+<mat-toolbar>
+  <mat-icon *ngIf="canNavigateUp" class="pointer" (click)="navigateUp()">
+    arrow_back
+  </mat-icon>
+  <span class="m-3"> {{ path || "Files" }} </span>
+  <mat-icon class="pointer" (click)="openNewFolderDialog()">
+    create_new_folder
+  </mat-icon>
+</mat-toolbar>
+
+<div class="content">
+  <mat-list>
+    <mat-list-item
+      *ngFor="let element of files"
+      class="file-or-folder mx-3 my-1"
+      (click)="navigate(element)"
+      (contextmenu)="openMenu($event, menuTrigger)"
+    >
+      <mat-icon color="primary" class="file-or-folder-icon" [ngClass]="{'pointer':element.isFolder}">
+        {{ element.isFolder ? "folder" : "insert_drive_file" }}
+      </mat-icon>
+      <span>{{ element.name }}</span>
+    </mat-list-item>
+  </mat-list>
+</div>
